@@ -19,7 +19,7 @@ function SearchPage() {
         }
     }
     var onSearch = debounce(function (e) {
-        if (e.target.value != '') {
+        if (e.target.value !== '') {
             const modifiedKey = e.target.value.replaceAll(' ', '+');
             setIsLoading(true);
             axios.get(`https://pixabay.com/api/?key=${window._PIXABAYKEY}&q=${modifiedKey}&image_type=photo`)
