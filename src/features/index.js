@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import Loader from './components/Loader';
+import Loader from '../components/Loader';
 import './index.css';
 
 function SearchPage() {
@@ -35,11 +35,11 @@ function SearchPage() {
     return (
         <div className="searchImage-container">
             {isLoading && <Loader></Loader>}
-            <h2>
+            <h2 className='header-title'>
                 Image Search Page
             </h2>
             <div className='search-container'>
-                <input className='search-inputField' placeholder='search image' onChange={(e) => onSearch(e)}></input>
+                <input className='search-inputField' placeholder='type to search image' onChange={(e) => onSearch(e)}></input>
             </div>
             <div className='image-container'>
                 {imageApiData.hits && imageApiData.hits.length > 0 && imageApiData.hits.map((image, index) => {

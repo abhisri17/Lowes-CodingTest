@@ -5,8 +5,12 @@
     margin-bottom: 2rem;
     margin-top: 1rem;
 }
+.header-title{
+    font-family: cursive;
+}
 .search-inputField{
-
+    border-radius: 20px;
+    padding-left: 10px;
 }
 .image-container{
 
