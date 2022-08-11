@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
+import Loader from './components/Loader';
+import './index.css';
 
 function SearchPage() {
-    const [searchValue, setSearchValue] = useState('');
     const [imageApiData, setImageApiData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     function debounce(func, interval) {
         var timeout;
         return function () {
@@ -17,17 +19,37 @@ function SearchPage() {
         }
     }
     var onSearch = debounce(function (e) {
-        // do heavy things
-        const modifiedKey = e.target.value.replaceAll(' ', '+');
-        axios.get(`https://pixabay.com/api/?key=${window._PIXABAYKEY}&q=${modifiedKey}&image_type=photo`)
-            .then((res) => {
-                console.log(res.data);
-            })
-        setSearchValue(modifiedKey);
-    }, 3000);
+        if (e.target.value != '') {
+            const modifiedKey = e.target.value.replaceAll(' ', '+');
+            setIsLoading(true);
+            axios.get(`https://pixabay.com/api/?key=${window._PIXABAYKEY}&q=${modifiedKey}&image_type=photo`)
+                .then((res) => {
+                    setImageApiData(res.data);
+                    setIsLoading(false);
+                })
+        }
+        else {
+            setImageApiData([]);
+        }
+    }, 2500);
     return (
-        <div className="">
-            <input onChange={(e) => onSearch(e)}></input>
+        <div className="searchImage-container">
+            {isLoading && <Loader></Loader>}
+            <h2>
+                Image Search Page
+            </h2>
+            <div className='search-container'>
+                <input className='search-inputField' placeholder='search image' onChange={(e) => onSearch(e)}></input>
+            </div>
+            <div className='image-container'>
+                {imageApiData.hits && imageApiData.hits.length > 0 && imageApiData.hits.map((image, index) => {
+                    return (
+                        <div className='image-div' key={index}>
+                            <img className='image-tag' src={image.webformatURL} alt='searchedImage'></img>
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     );
 }

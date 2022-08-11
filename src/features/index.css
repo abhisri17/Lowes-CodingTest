@@ -1,0 +1,30 @@
+.searchImage-container{
+    margin: 30px 5px 10px 30px;
+}
+.search-container{
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+.search-inputField{
+
+}
+.image-container{
+
+}
+.image-div{
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 48% !important;
+}
+.image-tag{
+    width: 100%;
+}
+@media only screen and (max-width: 700px) {
+    .searchImage-container{
+        margin: 30px 30px 10px 30px;
+    }
+    .image-div{
+        width: 98% !important;
+    }
+}
