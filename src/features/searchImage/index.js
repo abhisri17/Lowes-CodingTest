@@ -6,6 +6,7 @@ import './index.css';
 function SearchPage() {
     const [imageApiData, setImageApiData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [noDataFlag, setNoDataFlag] = useState(false);
     function debounce(func, interval) {
         var timeout;
         return function () {
@@ -19,6 +20,7 @@ function SearchPage() {
         }
     }
     var onSearch = debounce(function (e) {
+        setNoDataFlag(false);
         if (e.target.value !== '') {
             const modifiedKey = e.target.value.replaceAll(' ', '+');
             setIsLoading(true);
@@ -26,6 +28,9 @@ function SearchPage() {
                 .then((res) => {
                     setImageApiData(res.data);
                     setIsLoading(false);
+                    if (res.data.hits.length === 0){
+                        setNoDataFlag(true);
+                    }
                 })
         }
         else {
@@ -41,6 +46,9 @@ function SearchPage() {
             <div className='search-container'>
                 <input className='search-inputField' placeholder='type to search image' onChange={(e) => onSearch(e)}></input>
             </div>
+           {noDataFlag && <div className='search-container'>
+                <label className='search-noDataLabel'>No data found. Please try again...</label>
+            </div>}
             <div className='image-container'>
                 {imageApiData.hits && imageApiData.hits.length > 0 && imageApiData.hits.map((image, index) => {
                     return (

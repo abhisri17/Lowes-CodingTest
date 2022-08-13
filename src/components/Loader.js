@@ -3,7 +3,7 @@ import './styles.css';
 function Loader() {
   return (
     <div className="loader-container">
-        <div className='loader'></div>
+        <div data-testid='loader' className='loader'></div>
     </div>
   );
 }
