@@ -1,5 +1,5 @@
 import './App.css';
-import SearchPage from './features';
+import SearchPage from './features/searchImage';
 
 function App() {
   return (
