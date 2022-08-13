@@ -15,7 +15,7 @@ function SearchPage() {
                 func.apply(context, args);
             };
             clearTimeout(timeout);
-            timeout = setTimeout(later, interval || 2000);
+            timeout = setTimeout(later, interval || 1000);
         }
     }
     var onSearch = debounce(function (e) {
@@ -31,7 +31,7 @@ function SearchPage() {
         else {
             setImageApiData([]);
         }
-    }, 2500);
+    }, 1500);
     return (
         <div className="searchImage-container">
             {isLoading && <Loader></Loader>}
